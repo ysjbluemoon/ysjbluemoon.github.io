@@ -1,16 +1,14 @@
 CLASSES = {
-  0: 'daisy',
-  1: 'dandelion',
-  2: 'roses',
-  3: 'sunflowers',
-  4: 'tulips',
+  0 : 'butler', 
+  1 : 'female', 
+  2 : 'lion',
 };
 
 const MODEL_PATH =
     'model.json';
 
-const IMAGE_SIZE = 192;
-const TOPK_PREDICTIONS = 5;
+const IMAGE_SIZE = 150;
+const TOPK_PREDICTIONS = 3;
 
 let my_model;
 const demo = async () => {
@@ -25,7 +23,7 @@ const demo = async () => {
 
   status('');
 
-  // Make a prediction through the locally hosted cat.jpg.
+  // Make a prediction through the locally hosted butler.jpg.
   const catElement = document.getElementById('cat');
   if (catElement.complete && catElement.naturalHeight !== 0) {
     predict(catElement);
@@ -46,6 +44,7 @@ const demo = async () => {
  */
 async function predict(imgElement) {
   status('Predicting...');
+  status('GOT NEW IMAGE')
 
   // The first start time includes the time it takes to extract the image
   // from the HTML and preprocess it, in additon to the predict() call.
@@ -61,9 +60,11 @@ async function predict(imgElement) {
     // Normalize the image from [0, 255] to [-1, 1].
     // const normalized = img.sub(offset).div(offset);
     const normalized = img.div(255.0);
+    status('BEFORE RESHAPE')
 
     // Reshape to a single-element batch so we can pass it to predict.
     const batched = normalized.reshape([1, IMAGE_SIZE, IMAGE_SIZE, 3]);
+    status('RESHAPED')
 
     startTime2 = performance.now();
     // Make a prediction through my_model.
