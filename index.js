@@ -1,7 +1,7 @@
 CLASSES = {
-  0 : 'butler', 
-  1 : 'female', 
-  2 : 'lion',
+  0 : 'Butler Library', 
+  1 : 'Alma Mater Statue', 
+  2 : 'Columbia Lion Statue',
 };
 
 const MODEL_PATH =
